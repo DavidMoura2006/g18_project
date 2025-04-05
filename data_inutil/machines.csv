@@ -1,0 +1,4 @@
+machines_id,machines_type,capacity,purchase_date
+1,Prensa,1000,01/01/2020
+2,Cortadora,500,15/06/2019
+3,Injetora,750,20/09/2021
