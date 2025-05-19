@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session
 from classes.factory import Factory
 from classes.inventory import Inventory
 from classes.machine import Machine
-from classes.maintenancelog import Maintenancelog
+from classes.maintenancelog import MaintenanceLog
 from classes.userlogin import Userlogin
 
 prev_option = ""
