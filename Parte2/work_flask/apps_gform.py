@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, session
-from classes.factory import factory
-from classes.inventory import inventory
-from classes.machine import machine
-from classes.maintenancelog import maintenancelog
+from classes.factory import Factory
+from classes.inventory import Inventory
+from classes.machine import Machine
+from classes.maintenancelog import Maintenancelog
 from classes.userlogin import Userlogin
 
 prev_option = ""
