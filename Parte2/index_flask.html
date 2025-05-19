@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/industry.css') }}">
+</head>
+<body>
+    <div class ="dados">
+        <img src="{{ url_for('static', filename='img/industry.png') }}" alt="Industry Image" width="200" geight="200" >
+        <h1>Industry</h1>
+        <br>
+        <button id="edit" type="button" {{butshow}} onclick="location.href = '/?option=edit'" class="button1">Edit</button>
+        <button id="delete" type="button" {{butshow}} onclick="location.href = '/?option=delete'" class="button1">Delete</button>
+        <button id="insert" type="button" form="form" {{butedit}} class="button1">Save</button>button></button>
+        <button id="save" type="button" {{butshow}} onclick="location.href = '/?option=save'" class="button1">Save</button>
+        <button id="cancel" type="button" {{butshow}} onclick="location.href = '/?option=cancel'" class="button1">Cancel</button>
+        <button id="exit" type="button" {{butshow}} onclick="location.href = '/?option=exit'" class="button1">Exit</button>
+        <br><br>
+        <form id="form" action="/?option=save" method="post">
+            <label for="factories id">ID:</label>
+            {% if butedit == 'enabled' %}
+                <input type="text" disabled id="factories id" name="factories id" value="{{factories id}}" size="5"/>
+            {% else %}
+                <input type="text" {{butedit}} id="factories id" name="factories id" value="{{factories id}}" size="10"/>
+            {% endif %}
+            <br><br>    
+            <label for="name">Name:</label>
+            <input type="text" {{butedit}} id="name" name="name" value="{{ name }}" size="30"/>
+            <br><br>
+            <label for="location">Description:</label>
+            <input type="text" {{butedit}} id="location" name="location" value="{{location}}" size="10"/>
+        </form>
+        <br>
+            <button id="first" type="button" {{butshow}} onclick="window.location.href = '/?option=first'" class="button1">First</button>
+            <button id="previous" type="button" {{butshow}} onclick="window.location.href = '/?option=previous'" class="button1">Previous</button>
+            <button id="next" type="button" {{butshow}} onclick="window.location.href = '/?option=next'" class="button1">Next</button>
+            <button id="last" type="button" {{butshow}} onclick="window.location.href = '/?option=last'" class="button1">Last</button>
+        </div>
+    </body>
+</html>
+
+
