@@ -353,3 +353,8 @@ def userlogin():
                                usergroup = usergroup,password=password,ulogin=session.get("user"), group=group)
     else:
         return render_template("index1.html", ulogin=ulogin)
+
+
+if __name__ == '__main__':
+    app.run()
+    
