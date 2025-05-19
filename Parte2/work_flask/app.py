@@ -3,7 +3,7 @@ from datafile import filename
 from classes.factory import Factory
 from classes.inventory import Inventory
 from classes.machine import Machine
-from classes.maintenancelog import Maintenancelog
+from classes.maintenancelog import MaintenanceLog
 from classes.userlogin import Userlogin
 from subs.apps_gform import apps_gform 
 from subs.apps_subform import apps_subform 
