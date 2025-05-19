@@ -1,0 +1,98 @@
+<!doctype html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ tipo|capitalize }} Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  </head>
+  <body>
+    <div class="dados">
+      <img src="{{ url_for('static', filename='images/Person.jpg') }}" alt="persons" width="200" height="200" />
+      <h1>{{ tipo|capitalize }}</h1>
+      <br />
+
+      <button {{butshow}} onclick="window.location.href = '?option=edit'" class="button1">Edit</button>
+      <button {{butshow}} onclick="window.location.href = '?option=delete'" class="button1">Delete</button>
+      <button {{butshow}} onclick="window.location.href = '?option=insert'" class="button1">Insert</button>
+      <button type="submit" form="form" {{butedit}} class="button1">Save</button>
+      <button {{butedit}} onclick="window.location.href = '?option=cancel'" class="button1">Cancel</button>
+      <button {{butshow}} onclick="window.location.href = '?option=exit'" class="button1">Exit</button>
+
+      <form id="form" method="post">
+
+        {% if tipo == 'factory' %}
+          <br /><br />
+          <label for="id">Id:</label>
+          <input type="text" id="id" name="id" value="{{id}}" size="10" disabled />
+          <br /><br />  
+
+          <label for="_factories_name">Factories Name:</label>
+          <input type="text" {{butedit}} id="_factories_name" name="_factories_name" value="{{_factories_name}}" size="30" />
+          <br /><br />
+
+          <label for="_location">Location:</label>
+          <input type="text" {{butedit}} id="_location" name="_location" value="{{_location}}" size="10" />
+          <br /><br />
+
+        {% elif tipo == 'maintenancelog' %}
+          <br /><br />
+          <label for="_maintenance_logs_id">Id:</label>
+          <input type="text" id="_maintenance_logs_id" name="_maintenance_logs_id" value="{{_maintenance_logs_id}}" size="10" disabled />
+          <br /><br /> 
+
+          <label for="_details_maintenancelogs">Details:</label>
+          <input type="text" {{butedit}} id="_details_maintenancelogs" name="_details_maintenancelogs" value="{{_details_maintenancelogs}}" size="30" />
+          <br /><br />
+          
+          <label for="_log_date">Date:</label>
+          <input type="text" id="_log_date" name="_log_date" value="{{_log_date}}" size="10" disabled />
+          <br /><br />
+
+          <label for="_technician">Technician:</label>
+          <input type="text" id="_technician" name="_technician" value="{{_technician}}" size="10" disabled />
+          <br /><br />
+
+          <label for="_maintenance_date">Maintenance Date:</label>
+          <input type="text" id="_maintenance_date" name="_maintenance_date" value="{{_maintenance_date}}" size="10" disabled />
+          <br /><br />
+
+        {% elif tipo == 'machine' %}
+          <br /><br />
+          <label for="_machines_id">ID:</label>
+          <input type="text" id="_machines_id" name="_machines_id" value="{{_machines_id}}" size="10" disabled />
+          <br /><br />
+
+          <label for="_machines_type">Type:</label>
+          <input type="text" {{butedit}} id="_machines_type" name="_machines_type" value="{{_machines_type}}" size="30" />
+          <br /><br />
+
+          <label for="_capacity">Capacity:</label>
+          <input type="text" {{butedit}} id="_capacity" name="_capacity" value="{{_capacity}}" size="20" />
+          <br /><br />
+
+          <label for="_purchase_date">Purchase Date:</label>
+          <input type="text" {{butedit}} id="_purchase_date" name="_purchase_date" value="{{_purchase_date}}" size="10" />
+          <br /><br />
+
+        {% elif tipo == 'inventory' %}
+          <br /><br />
+          <label for="_factories_id">Factories Id:</label>
+          <input type="text" id="_factories_id" name="_factories_id" value="{{_factories_id}}" size="10" disabled />
+          <br /><br />
+
+          <label for="_machines_id">Machines Id:</label>
+          <input type="text" {{butedit}} id="_machines_id" name="_machines_id" value="{{_machines_id}}" size="10" />
+          <br /><br />
+
+        {% endif %}
+      </form>
+
+      <br />
+      <button {{butshow}} onclick="window.location.href = '?option=first'" class="button1">First</button>
+      <button {{butshow}} onclick="window.location.href = '?option=previous'" class="button1">Previous</button>
+      <button {{butshow}} onclick="window.location.href = '?option=next'" class="button1">Next</button>
+      <button {{butshow}} onclick="window.location.href = '?option=last'" class="button1">Last</button>
+    </div>
+  </body>
+</html>
