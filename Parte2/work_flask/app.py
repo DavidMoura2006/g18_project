@@ -27,7 +27,7 @@ def login():
 @app.route("/logoff")
 def logoff():
     session.pop("user",None)
-    return render_template("Index1.html", ulogin=session.get("user"))
+    return render_template("index.html", ulogin=session.get("user"))
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
