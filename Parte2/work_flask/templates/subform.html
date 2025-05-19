@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class = "dados">
+        <img src="/static/images/{{cname}}.jpg" alt="{{cname}}" width="300" height="200">
+        <h1>{{cl_header}}</h1>
+        <br>
+        <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=edit'" class="button1">Edit</button>
+        <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=delete'" class="button1">Delete</button>
+        <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=insert'" class="button1">Insert</button>
+        <button id="save" type="submit" form="form" class = "button1" {{butedit}}>Save</button>
+        <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/subform/{{cname}}?option=cancel'" class="button1">Cancel</button>
+        <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=exit'" class="button1">Exit</button>
+        <br><br>
+        {% set ns = namespace(id_header=0) %}
+        <form id="form" action="/subform/{{cname}}?option=save" method="post">
+            {% for key in att %}
+                {% if loop.index == 1 %}
+                  <label for="{{key}}">{{des[loop.index-1]}}:</label>
+                  <input type="text" readonly id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="4"/>
+                  {% set ns.id_header = obj[key] %}
+                {% else %}                    
+                  <label for="{{key}}">{{des[loop.index-1]}}:</label>
+                  <input type="text" {{butedit}} id="{{key}}" name="{{key}}" value="{{obj[key]}}" size="30"/>
+                {% endif %}
+                <br><br>
+            {% endfor %}
+        </form>
+        <button id="first" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=first'" class="button1">First</button>
+        <button id="previous" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=previous'" class="button1">Previous</button>
+        <button id="next" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=next'" class="button1">Next</button>
+        <button id="last" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=last'" class="button1">Last</button>
+    </div>
+    <br><br>
+    <div class="dados">
+        <h2>{{sbl_header}}</h2>
+        <table>
+              <tr>
+                {% for header in desl %}
+                    {% if loop.index > 1 %}
+                        <th>{{header}}</th>
+                    {% endif %}
+                {% endfor %}
+                <td><button id="addrow" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=addrow'" class="button1">+</button></td>
+              </tr>
+                {% for ob in objl %}
+                  <tr>
+                    {% for key in attl %}
+                        {% if loop.index > 1 %}
+                            <td>{{ ob[key] }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td><button id="delrow" type="button" {{butshow}} onclick="window.location.href = '/subform/{{cname}}?option=delrow_{{loop.index-1}}'" class="button1">-</button></td>
+                  </tr>
+                {% endfor %}                
+                    {% if butshow == 'disabled' and butedit == 'disabled' %}
+                    <tr>
+                        <form id="formrow" action="/subform/{{cname}}?option=saverow" method="post">
+                        {% for key in attl %}
+                            {% if loop.index == 2 %}
+                                {{key}}
+                                <td><input type="text" readonly id="{{key}}" name="{{key}}" value="{{ns.id_header}}" size="20"/></td>
+                            {% endif %}
+                            {% if loop.index > 2 %}
+                                {{key}}
+                                <td><input type="text" id="{{key}}" name="{{key}}" value="" size="20"/></td>
+                            {% endif %}
+                        {% endfor %}
+                        <td><button id="save" type="submit" form="formrow" class = "button1" >Save</button>
+                            <button id="cancelrow" type="button" onclick="window.location.href = '/subform/{{cname}}?option=cancelrow'" class="button1">Cancel</button></td>
+                        </form>
+                    <tr>
+                    {% endif %}
+        </table>
+    </div>
+
+{% endblock %}
