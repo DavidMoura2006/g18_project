@@ -134,7 +134,7 @@ def maintenancelog():
         _technician = obj._technician
         _maintenance_date = obj._maintenance_date
 
-    return render_template("index.html", tipo="books", butshow=butshow, butedit=butedit,
+    return render_template("index.html", tipo="maintenancelog", butshow=butshow, butedit=butedit,
                             id=id, _details_maintenancelogs=_details_maintenancelogs, _log_date=_log_date, _technician=_technician,
                             _maintenance_date=_maintenance_date, ulogin=session.get("user"))
 
@@ -190,7 +190,7 @@ def machine():
         _capacity= obj._capacity
         _purchase_date = obj._purchase_date
 
-    return render_template("index.html", tipo="author", butshow=butshow, butedit=butedit,
+    return render_template("index.html", tipo="machine", butshow=butshow, butedit=butedit,
                            id=id, _machines_type=_machines_type, _capacity=_capacity,
                            _purchase_date=_purchase_date,
                            ulogin=session.get("user"))
@@ -247,7 +247,7 @@ def inventory():
         _factories_id = obj._factories_id
         _machines_id = obj._machines_id
 
-    return render_template("index.html", tipo="books_awards", butshow=butshow, butedit=butedit,
+    return render_template("index.html", tipo="inventory", butshow=butshow, butedit=butedit,
                             id=id, _factories_id=_factories_id, _machines_id=_machines_id,
                             ulogin=session.get("user"))
 
