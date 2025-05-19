@@ -259,7 +259,7 @@ def inventory():
 
 @app.route("/")
 def index():
-    return render_template("index1.html", ulogin=session.get("user"))
+    return render_template("Index1.html", ulogin=session.get("user"))
     
 @app.route("/login")
 def login():
@@ -268,7 +268,7 @@ def login():
 @app.route("/logoff")
 def logoff():
     session.pop("user",None)
-    return render_template("index1.html", ulogin=session.get("user"))
+    return render_template("Index1.html", ulogin=session.get("user"))
 
 @app.route("/chklogin", methods=["post","get"])
 def chklogin():
@@ -277,7 +277,7 @@ def chklogin():
     resul = Userlogin.chk_password(user, password)
     if resul == "Valid":
         session["user"] = user
-        return render_template("index1.html", ulogin=session.get("user"))
+        return render_template("Index1.html", ulogin=session.get("user"))
     return render_template("login.html", user=user, password = password, ulogin=session.get("user"),resul = resul)
 
 @app.route("/Userlogin", methods=["post","get"])
