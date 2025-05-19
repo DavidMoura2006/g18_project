@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Userlogin demo PCII</title>
+    {% block title %}
+    {% endblock %}
+  </head>
+    <body>
+        <nav>
+            <ul class="menu">
+                {% if ulogin == None %}
+                    <li><a class="button" href="/login">Login</a></li>
+                {% else %}
+                    <li><a class="button" href="/logoff">Logoff</a></li>
+                    <li><a class="button" href="/author">Author</a></li>
+                    <li><a class="button" href="/books">Books</a></li>
+                    <li><a class="button" href="/awards">Awards</a></li>
+                    <li><a class="button" href="/books_awards">Books Awards</a></li>
+                    <li><a class="button" href="/Userlogin">Users</a></li>
+                    <li><a class="button" style="color:lightblue">User: {{ulogin}}</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
