@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, session
 from datafile import filename
-from classes.courses import Courses
-from classes.course_instructors import Courses_Instructors
-from classes.instructor import Instructors
-from classes.platform import Platforms
+from classes.factory import Factory
+from classes.inventory import Inventory
+from classes.machine import Machine
+from classes.maintenancelog import Maintenancelog
 from classes.userlogin import Userlogin
 from subs.apps_gform import apps_gform 
 from subs.apps_subform import apps_subform 
