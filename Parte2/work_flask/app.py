@@ -259,7 +259,7 @@ def inventory():
 
 @app.route("/")
 def index():
-    return render_template("base.html", ulogin=session.get("user"))
+    return render_template("index.html", ulogin=session.get("user"))
     
 @app.route("/login")
 def login():
