@@ -42,11 +42,11 @@ class Factory(Gclass):
     
     @property
     def location(self):
-        return self._dob
+        return self._location
     
     @location.setter
-    def location(self, dob):
-        self._dob = dob
+    def location(self, location):
+        self._location = location
     
     
         
