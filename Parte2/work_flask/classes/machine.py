@@ -20,7 +20,7 @@ class Machine(Gclass):
         self._machines_id = id
         self._machines_type = type
         self._capacity = capacity
-        self._purchase_date = datetime.datetime.strptime(data_compra, "%d/%m/%Y").date()
+        self._purchase_date = datetime.datetime.strptime(data_compra, "%Y/%m/%d").date()
         
         Machine.obj[id] = self
         
