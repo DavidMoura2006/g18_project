@@ -11,7 +11,7 @@ class MaintenanceLog(Gclass):
 
     header = 'MaintenanceLog'
     
-    des = ['maintenance_id','details_maintenancelogs','log_date','technician','maintenance_date']
+    des = ['Id','Details','Log Date','Technician','Maintenance Date']
     
     def __init__(self, id, details, data_log, tecnicos, data_manutencao):
         super().__init__()
