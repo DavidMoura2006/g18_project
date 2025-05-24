@@ -11,7 +11,7 @@ class Machine(Gclass):
 
     header = 'Machine'
     
-    des = ['machines_id','machines_type','capacity','purchase_date']
+    des = ['Id','Type','Capacity','Purchase Date']
     
     def __init__(self, id, type, capacity, data_compra):
         super().__init__()
