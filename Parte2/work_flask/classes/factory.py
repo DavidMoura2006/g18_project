@@ -10,7 +10,7 @@ class Factory(Gclass):
 
     header = 'Factory'
     
-    des = ['factories_id','factories_name','location']
+    des = ['Id','Name','Location']
     
     def __init__(self, id, name, location):
         super().__init__()
