@@ -9,7 +9,7 @@ class Inventory(Gclass):
     sortkey = ''
     att = ['_factories_id','_machines_id']
     header = 'Inventory'
-    des = ['factories_id','machines_id']
+    des = ['Factory Id','Machine Id']
 
     def __init__(self, factories_id, machines_id):
         super().__init__()
