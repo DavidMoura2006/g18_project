@@ -7,47 +7,51 @@ class Inventory(Gclass):
     lst = list()
     pos = 0
     sortkey = ''
-    att = ['_factories_id','_machines_id']
+    att = ['_id', '_factories_id', '_machines_id']
     header = 'Inventory'
-    des = ['Factory Id','Machine Id']
+    des = ['Id', 'Factory Id', 'Machine Id']
 
-    def __init__(self, factories_id, machines_id):
+    def __init__(self, id, factories_id, machines_id):
         super().__init__()
 
-        # Verifica se a factory_id e machine_id existem nas listas (assumindo que as listas contêm apenas IDs)
-        if int(factories_id) not in Factory.lst:
-            print('Factory', factories_id, 'not found')
+        factories_id = int(factories_id)
+        machines_id = int(machines_id)
+
+        # Verificar se IDs existem
+        if factories_id not in Factory.lst:
+            print(f'Factory {factories_id} not found')
             return
 
-        if int(machines_id) not in Machine.lst:
-            print('Machine', machines_id, 'not found')
+        if machines_id not in Machine.lst:
+            print(f'Machine {machines_id} not found')
             return
 
-        # self._id = int(id)
-        self._factories_id = int(factories_id)
-        self._machines_id = int(machines_id)
+        id = Inventory.get_id(id)
+        self._id = id
+        self._factories_id = factories_id
+        self._machines_id = machines_id
 
-        # Inventory.obj[self._id] = self
-        # Inventory.lst.append(self._id)
+        Inventory.obj[id] = self
+        Inventory.lst.append(id)
 
-    # @property
-    # def id(self):
-    #     return self._id
-    # @id.setter
-    # def id(self, id):
-    #     self._id = id
+    @property
+    def id(self):
+        return self._id
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     @property
     def factories_id(self):
         return self._factories_id
     @factories_id.setter
-    def factories_id(self, factories_id):
-        self._factories_id = factories_id
+    def factories_id(self, value):
+        self._factories_id = value
 
     @property
     def machines_id(self):
         return self._machines_id
     @machines_id.setter
-    def machines_id(self, machines_id):
-        self._machines_id = machines_id
-    
+    def machines_id(self, value):
+        self._machines_id = value
+
