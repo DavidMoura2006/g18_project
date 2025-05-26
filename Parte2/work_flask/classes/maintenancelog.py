@@ -19,9 +19,9 @@ class MaintenanceLog(Gclass):
         id = MaintenanceLog.get_id(id)
         self._maintenance_id = id
         self._details_maintenancelogs = details
-        self._date_log = datetime.datetime.strptime(data_log, "%Y/%m/%d").date()
+        self._log_date = datetime.datetime.strptime(data_log, "%Y/%m/%d").date()
         self._technician = tecnicos
-        self._date_maintenance = datetime.datetime.strptime(data_manutencao, "%Y/%m/%d").date()
+        self._maintenance_date = datetime.datetime.strptime(data_manutencao, "%Y/%m/%d").date()
         
         MaintenanceLog.obj[id] = self
         
