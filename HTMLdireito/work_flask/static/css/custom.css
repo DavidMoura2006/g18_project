@@ -1,0 +1,15 @@
+/* custom.css */
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.btn-outline-secondary {
+  transition: background-color .2s;
+}
+.btn-outline-secondary:hover {
+  background-color: rgba(0,0,0,.05);
+}

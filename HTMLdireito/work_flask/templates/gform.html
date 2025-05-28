@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<style>
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.button-yellow {
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+</style>
+
+<div class="dados">
+
+<!-- Cabeçalho com imagem e título condicional -->
+<div class="header-container">
+  {% if cname == 'Factory' %}
+    <img src="{{ url_for('static', filename='images/factory37.png') }}" alt="Factory" height="80">
+    <h1>Factory</h1>
+  {% elif cname == 'Machine' %}
+    <img src="{{ url_for('static', filename='images/machine.png') }}" alt="Machine" height="80">
+    <h1>Machine</h1>
+  {% elif cname == 'MaintenanceLog' %}
+    <img src="{{ url_for('static', filename='images/maintenance.png') }}" alt="Maintenance" height="80">
+    <h1>Maintenance</h1>
+  {% elif cname == 'Inventory' %}
+    <img src="{{ url_for('static', filename='images/inventory.png') }}" alt="Inventory" height="80">
+    <h1>Inventory</h1>
+  {% elif cname == 'Userlogin' %}
+    <img src="{{ url_for('static', filename='images/userlogin.png') }}" alt="Userlogin" height="80">
+    <h1>Userlogin</h1>
+  {% else %}
+    <img src="{{ url_for('static', filename='images/default.png') }}" alt="Default" height="80">
+    <h1>{{ cname }}</h1>
+  {% endif %}
+</div>
+
+
+  <!-- Botões de navegação -->
+  <div class="button-group">
+    <a href="{{ url_for('gform', cname=cname, option='first') }}" class="button-yellow" {{ butshow }}>First</a>
+    <a href="{{ url_for('gform', cname=cname, option='previous') }}" class="button-yellow" {{ butshow }}>Previous</a>
+    <a href="{{ url_for('gform', cname=cname, option='next') }}" class="button-yellow" {{ butshow }}>Next</a>
+    <a href="{{ url_for('gform', cname=cname, option='last') }}" class="button-yellow" {{ butshow }}>Last</a>
+  </div>
+
+  <!-- Formulário de dados -->
+  <form id="form" method="post" action="{{ url_for('gform', cname=cname, option='save') }}">
+    <div class="form-grid">
+      {% for key in att %}
+        <label for="{{ key }}" class="label-bold">{{ des[loop.index0] }}:</label>
+        <input type="text" id="{{ key }}" name="{{ key }}" value="{{ obj[key] }}"
+          {% if loop.index == 1 %} readonly {% else %} {{ butedit }} {% endif %}>
+      {% endfor %}
+    </div>
+  </form>
+  
+  <!-- Botões de ação -->
+  <div class="button-group">
+    <a href="{{ url_for('gform', cname=cname, option='edit') }}" class="button-yellow" {{ butshow }}>Edit</a>
+    <a href="{{ url_for('gform', cname=cname, option='delete') }}" class="button-yellow" {{ butshow }}>Delete</a>
+    <a href="{{ url_for('gform', cname=cname, option='insert') }}" class="button-yellow" {{ butshow }}>Insert</a>
+    <button type="submit" form="form" {{ butedit }} class="button-yellow" style="font-size: 16px; font-family: Arial, sans-serif;">
+    Save
+</button>
+    <a href="{{ url_for('gform', cname=cname, option='cancel') }}" class="button-yellow" {{ butedit }}>Cancel</a>
+    <a href="{{ url_for('gform', cname=cname, option='exit') }}" class="button-yellow" {{ butshow }}>Exit</a>
+  </div>
+   
+
+</div>
+{% endblock %}

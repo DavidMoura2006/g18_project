@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<style>
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.button-yellow {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+</style>
+
+<div class="dados">
+    <br><br><br>
+    <img src="{{ url_for('static', filename='images/userlogin.png')}}" alt="userlogin" width="200" height="200">
+    <h1>Userlogin</h1>
+    <br>
+    
+    {% if group == "admin" %} 
+        <div class="button-row">
+            <button id="first" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=first'" class="button-yellow">First</button>
+            <button id="previous" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=previous'" class="button-yellow">Previous</button>
+            <button id="next" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=next'" class="button-yellow">Next</button>
+            <button id="last" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=last'" class="button-yellow">Last</button>
+        </div>
+    {% endif %}
+
+    <form id="form" action="/Userlogin?option=save" method="post">
+        {% if group == "admin" %} 
+            <label for="id">Id:</label>
+            <input type="text" disabled id="id" name="id" value="{{id}}" size="4"/>
+            
+            <label for="user">User:</label>
+            <input type="text" {{butedit}} id="user" name="user" value="{{user}}" size="40"/>
+            
+            <label for="usergroup">Group:</label>
+            <input type="text" {{butedit}} id="usergroup" name="usergroup" value="{{usergroup}}" size="40"/>
+        {% else %}
+            <label for="id">Id:</label>
+            <input type="text" disabled id="id" name="id" value="{{id}}" size="4"/>
+            
+            <label for="user">User:</label>
+            <input type="text" disabled id="user" name="user" value="{{user}}" size="40"/>
+        
+            <label for="usergroup">Group:</label>
+            <input type="text" disabled id="usergroup" name="usergroup" value="{{usergroup}}" size="40"/>
+        {% endif %}
+    
+        <label for="password">Password:</label>
+        <input type="password" {{butedit}} id="password" name="password" size="40"/>
+    </form>
+    <br>
+
+    <div class="button-row">
+        <button id="edit" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=edit'" class="button-yellow">Edit</button>
+        {% if group == "admin" %} 
+            <button id="delete" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=delete'" class="button-yellow">Delete</button>
+            <button id="insert" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=insert'" class="button-yellow">Insert</button>
+        {% endif %}
+        <button id="save" type="submit" form="form" {{butedit}} class="button-yellow">Save</button>
+        <button id="cancel" type="button" {{butedit}} onclick="window.location.href = '/Userlogin?option=cancel'" class="button-yellow">Cancel</button>
+        <button id="exit" type="button" {{butshow}} onclick="window.location.href = '/Userlogin?option=exit'" class="button-yellow">Exit</button>
+    </div>
+
+    <br>
+    <p style="color: red;">{{msg}}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  .page-title {
+    text-align: center;
+    font-size: 36px;
+    margin: 30px 0 50px 0;
+    color: white;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-items: center;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+
+  .image-item {
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .image-item img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.3);
+    transition: transform 0.2s;
+  }
+
+  .image-item img:hover {
+    transform: scale(1.05);
+  }
+
+  .image-item p {
+    color: white;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: justify;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+    width: 400px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+</style>
+
+<h1 class="page-title">Welcome to our company</h1>
+
+<div class="image-grid">
+  <div class="image-item" onclick="openModal(0)">
+    <img src="{{ url_for('static', filename='images/fabrica1.jpg') }}" alt="Factory">
+    <p>Factory</p>
+  </div>
+  <div class="image-item" onclick="openModal(1)">
+    <img src="{{ url_for('static', filename='images/maquinas1.jpg') }}" alt="Machines">
+    <p>Machines</p>
+  </div>
+  <div class="image-item" onclick="openModal(2)">
+    <img src="{{ url_for('static', filename='images/employee.jpg') }}" alt="Employees">
+    <p>Employees</p>
+  </div>
+  <div class="image-item" onclick="openModal(3)">
+    <img src="{{ url_for('static', filename='images/inventory1.jpg') }}" alt="Inventory">
+    <p>Inventory</p>
+  </div>
+</div>
+
+<!-- Modais com descrições -->
+<div id="modal0" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(0)">&times;</span>
+    <p>
+      Our company proudly operates a wide network of modern factories strategically located across several key regions. These locations were carefully chosen to optimize logistics, reduce transportation costs, and ensure quick access to local and international markets.
+    </p>
+    <p>
+      Each factory is equipped with state-of-the-art technology and maintained under rigorous quality and safety standards. From automated production lines to advanced energy-efficient systems, our facilities reflect our commitment to innovation and responsibility.
+    </p>
+  </div>
+</div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(1)">&times;</span>
+    <p>
+      Our advanced machinery ensures efficiency and precision across all production processes. We utilize cutting-edge equipment for manufacturing, quality control, and packaging to meet global standards.
+    </p>
+    <p>
+      Continuous investment in machine upgrades guarantees minimal downtime and top-tier performance, reinforcing our role as a leader in industrial innovation.
+    </p>
+  </div>
+</div>
+
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(2)">&times;</span>
+    <p>
+      Our employees are the heart of our success. We foster a professional, respectful, and inclusive work environment where each team member is empowered to grow and contribute meaningfully.
+    </p>
+    <p>
+      We offer ongoing training, career advancement, and a safe, comfortable workspace that promotes collaboration and innovation.
+    </p>
+  </div>
+</div>
+
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal(3)">&times;</span>
+    <p>
+      Our inventory system is designed for real-time accuracy and efficiency. We track every item from raw materials to finished products, ensuring optimal stock levels and fast fulfillment.
+    </p>
+    <p>
+      With intelligent categorization, automated alerts, and seamless integration with logistics, our inventory management ensures no resource goes to waste.
+    </p>
+  </div>
+</div>
+
+<script>
+  function openModal(index) {
+    document.getElementById("modal" + index).style.display = "flex";
+  }
+
+  function closeModal(index) {
+    document.getElementById("modal" + index).style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    for (let i = 0; i < 4; i++) {
+      let modal = document.getElementById("modal" + i);
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    }
+  };
+</script>
+{% endblock %}

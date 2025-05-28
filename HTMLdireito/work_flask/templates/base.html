@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestão de Fábrica</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #2f2f2f; /* cinzento escuro */
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      background-color: #bfa500; /* amarelo escuro */
+      color: white;
+      padding: 10px 20px;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      padding: 10px 15px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: #e0c200;
+      border-radius: 4px;
+    }
+
+    .navbar a.active {
+      background-color: #e0c200;
+      border-radius: 4px;
+    }
+
+    .navbar-right {
+      margin-left: auto;
+    }
+
+    .content {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %} button-yellow" data-page="main-menu">
+      🏠 Main menu
+    </a>
+    <a href="{{ url_for('gform', cname='Factory') }}" class="{% if request.endpoint == 'gform' and request.args.get('cname') == 'Factory' %}active{% endif %}" data-page="factory">
+      <i class="fas fa-industry"></i> Factory
+    </a>
+    <a href="{{ url_for('gform', cname='Machine') }}" class="{% if request.endpoint == 'gform' and request.args.get('cname') == 'Machine' %}active{% endif %}" data-page="machine">
+      <i class="fas fa-cogs"></i> Machine
+    </a>
+    <a href="{{ url_for('gform', cname='MaintenanceLog') }}" class="{% if request.endpoint == 'gform' and request.args.get('cname') == 'MaintenanceLog' %}active{% endif %}" data-page="maintenance">
+      <i class="fas fa-wrench"></i> Maintenance
+    </a>
+    <a href="{{ url_for('gform', cname='Inventory') }}" class="{% if request.endpoint == 'gform' and request.args.get('cname') == 'Inventory' %}active{% endif %}" data-page="inventory">
+      <i class="fas fa-boxes"></i> Inventory
+    </a>
+    <a href="{{ url_for('userlogin') }}" class="{% if request.endpoint == 'userlogin' %}active{% endif %}" data-page="users">
+      <i class="fas fa-user"></i> Users
+    </a>
+    <div class="navbar-right">
+      {% if ulogin %}
+        <span style="margin-right: 10px;">Logged in as {{ ulogin }}</span>
+        <a href="{{ url_for('logoff') }}"><i class="fas fa-sign-out-alt"></i> Logoff</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="{% if request.endpoint == 'login' %}active{% endif %}" data-page="login">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = {{ 'true' if ulogin else 'false' }};
+      if (!isLoggedIn) {
+        document.querySelectorAll('.navbar a').forEach(link => {
+          const page = link.getAttribute('data-page');
+          // Permitir clicar só em Main menu e Login sem aviso
+          if (page !== 'main-menu' && page !== 'login') {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+              alert('You need to login to access this page.');
+            });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
