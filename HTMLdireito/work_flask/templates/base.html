@@ -66,6 +66,9 @@
     <a href="{{ url_for('gform', cname='Inventory') }}" class="{% if request.endpoint == 'gform' and request.args.get('cname') == 'Inventory' %}active{% endif %}" data-page="inventory">
       <i class="fas fa-boxes"></i> Inventory
     </a>
+    <a href="{{ url_for('plot') }}" class="{% if request.endpoint == 'plot' %}active{% endif %}" data-page="plot">
+      <i class="fas fa-chart-line"></i> Gráfico
+    </a>
     <a href="{{ url_for('userlogin') }}" class="{% if request.endpoint == 'userlogin' %}active{% endif %}" data-page="users">
       <i class="fas fa-user"></i> Users
     </a>
