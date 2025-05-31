@@ -14,7 +14,7 @@ def apps_plot():
     engine = create_engine(f'sqlite:///{filename}factorys.db')
     df_products = pd.read_sql_table('Machine', engine)
     
-    result = df_products.groupby('machines_type')['capacity'].sum()
+    result = df_products.groupby('machines_type').size()
     print(result.head())
     
     p_ids = result.index
@@ -34,7 +34,7 @@ def apps_plot():
         'xtick.color': 'white',
         'ytick.color': 'white',
         'text.color': 'white',
-        'axes.titlesize': 18,       
+        'axes.titlesize': 18,      
         'axes.labelsize': 14,       
         'xtick.labelsize': 12,      
         'ytick.labelsize': 12,
@@ -50,8 +50,8 @@ def apps_plot():
     ax.bar(p_names, quantities, width=0.5, color='#FFD700', edgecolor='black')
 
     ax.set_xlabel('Tipo de Máquina')
-    ax.set_ylabel('Capacidade')
-    ax.set_title('Capacidades das Máquinas')
+    ax.set_ylabel('Número de Máquinas')
+    ax.set_title('Número de Máquinas por tipo')
     plt.xticks(rotation=15)
 
     fig.subplots_adjust(left=0.08, right=0.97, top=0.90, bottom=0.25)
@@ -63,9 +63,6 @@ def apps_plot():
     plt.close(fig)
 
     return render_template("plot.html", image=image, ulogin=session.get("user"))
-
-
-
 
 
 
